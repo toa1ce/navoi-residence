@@ -1,0 +1,9 @@
+#utp .modal-window h2 {
+    font-size: 40px;
+}
+
+@media (max-width: 600px) {
+    #utp .modal-window h2 {
+        font-size: 30px;
+    }
+}
