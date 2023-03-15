@@ -103,7 +103,7 @@
                         <p>Алмарасан шатқалына дейін</p>
                     </div>
                     <div class="main-text-about__group">
-                        <h3><span>26</span> <span>/</span> Метров</h3>
+                        <h3><span>30</span> <span>/</span> Метр</h3>
                         <p>Үлкен Алматы өзеніне дейін</p>
                     </div>
                 </div>
@@ -256,10 +256,10 @@
                 <a href="#utp" title="Close" class="modal-close"><button type="button" class="btn-close" disabled aria-label="Close"></button></a>
                 <img src="./img/float-maket-img1.jpg" alt="">
                 <h2>Заявканызды қалдырыныз</h2>
-                <form action="">
+                <form id="myForm" onsubmit="event.preventDefault()">
                     <input type="text" name="Name" placeholder="Сіздің атыңыз">
                     <input type="tel" name="Phone" placeholder="Сіздің нөмірініз">
-                    <button type="button">Жіберу</button>
+                    <button type="button" onclick="SubForm()">Жіберу</button>
                 </form>
             </div>
         </div>  
@@ -307,10 +307,10 @@
                 <div class="form-title" data-aos="fade-up" data-aos-duration="800">
                     <h2>Маманнан толық тегін кеңес алуға заявка қалдырыңыз.</h2>
                 </div>
-                <form action="" data-aos="fade-right" data-aos-duration="1000">
+                <form id="myForm2" data-aos="fade-right" data-aos-duration="1000" onsubmit="event.preventDefault()">
                     <input type="text" name="Name" placeholder="Сіздің атыңыз">
                     <input type="tel" name="Phone" placeholder="Сіздің нөмірініз">
-                    <button type="button">Жіберу</button>
+                    <button type="button" onclick="SubForm2()">Жіберу</button>
                 </form>
             </div>
         </div>
@@ -338,7 +338,7 @@
                 </div>
                 <div class="footer-subtitle">
                     <div class="footer-adress">
-                        <h3>Головной офис:</h3>
+                        <h3>Отдел продаж:</h3>
                         <p>г.Алматы, проспект Абая 151, БЦ «Алатау», 2 этаж, офис 210</p>
                     </div>
                     <div class="write-us-btn">
@@ -395,10 +395,10 @@
                             <div class="navar-contact2">
                                 <div class="select-lang">
                                     <div class="lang-ru">
-                                        <a href="">ru</a>
+                                        <a href="index.html">ru</a>
                                     </div>
                                     <div class="lang-kz">
-                                        <a href="">kz</a>
+                                        <a href="#">kz</a>
                                     </div>    
                                 </div>
                             </div>
@@ -416,5 +416,46 @@
     <script>
         AOS.init();
     </script>
+    <script
+		src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous">
+    </script>
+	<script>
+		function SubForm (){
+			$.ajax({
+				url:"https://api.apispreadsheets.com/data/5Mycu9XW2SWKTOJI/",
+				type:"post",
+				data:$("#myForm").serializeArray(),
+				success: function(){
+					alert("Деректер сәтті жіберілді! Кері байланыс күтіңіз :)")
+                    $("#myForm").trigger('reset');
+				},
+				error: function(){
+					alert("Бірдеңе дұрыс болмады, қайталап көріңіз :(")
+				}
+			});
+		}
+	</script>
+    <script
+		src="https://code.jquery.com/jquery-3.4.1.js"
+		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+		crossorigin="anonymous"></script>
+	<script>
+		function SubForm2 (){
+			$.ajax({
+				url:"https://api.apispreadsheets.com/data/eukWOMEX85DKXWP1/",
+				type:"post",
+				data:$("#myForm2").serializeArray(),
+				success: function(){
+					alert("Деректер сәтті жіберілді! Кері байланыс күтіңіз :)")
+                    $("#myForm2").trigger('reset');
+				},
+				error: function(){
+					alert("Бірдеңе дұрыс болмады, қайталап көріңіз :(")
+				}
+			});
+		}
+	</script>
 </body>
 </html>
