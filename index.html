@@ -256,9 +256,9 @@
                 <img src="./img/float-maket-img1.jpg" alt="">
                 <h2>Оставьте заявку</h2>
                 <form id="myForm">
-                    <input type="text" name="Name" placeholder="Ваше имя">
-                    <input type="tel" name="Phone" placeholder="Ваш номер">
-                    <button type="button" onclick='SubForm()'>Отправить</button>
+                    <input type="text" name="Name" placeholder="Ваше имя" autocomplete="off">
+                    <input type="tel" name="Phone" placeholder="Ваш номер" autocomplete="off">
+                    <button type="button" onclick='SubForm(), Form()'>Отправить</button>
                 </form>
             </div>
         </div>  
@@ -307,8 +307,8 @@
                     <h2>Оставьте заявку на подробную бесплатную консультацию от специалиста.</h2>
                 </div>
                 <form id="myForm2" action="" data-aos="fade-right" data-aos-duration="1000">
-                    <input type="text" name="Name" placeholder="Ваше имя">
-                    <input type="tel" name="Phone" placeholder="Ваш номер">
+                    <input type="text" name="Name" placeholder="Ваше имя" autocomplete="off">
+                    <input type="tel" name="Phone" placeholder="Ваш номер" autocomplete="off">
                     <button type="button" onclick='SubForm2()'>Отправить</button>
                 </form>
             </div>
@@ -421,28 +421,58 @@
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 		crossorigin="anonymous">
     </script>
-	<script>
-		function SubForm (){
-			$.ajax({
-				url:"https://api.apispreadsheets.com/data/5Mycu9XW2SWKTOJI/",
-				type:"post",
-				data:$("#myForm").serializeArray(),
-				success: function(){
-					alert("Данные отправлены успешно! Ожидайте обратной связи :)")
+    <script>
+        function SubForm (){
+            var name = document.forms["myForm"]["Name"].value;
+            var phone = document.forms["myForm"]["Phone"].value;
+            // Validate the name field
+            if (name == "") {
+                alert("Пожалуйста, введите ваше имя");
+                return false;
+            }
+            // Validate the phone field
+            var phoneRegex = /^\d{11}$/; // Regular expression to match a 10-digit phone number
+            if (!phoneRegex.test(phone)) {
+                alert("Пожалуйста, введите корректный номер телефона (11 цифр без пробелов или дефисов)");
+                return false;
+            }
+            // Submit the form if validation passes
+            $.ajax({
+                url:"https://api.apispreadsheets.com/data/5Mycu9XW2SWKTOJI/",
+                type:"post",
+                data:$("#myForm").serializeArray(),
+                success: function(){
+                    alert("Данные отправлены успешно! Ожидайте обратной связи :)")
                     $("#myForm").trigger('reset');
-				},
-				error: function(){
-					alert("Что то пошло не так, повторите попытку :(")
-				}
-			});
-		}
-	</script>
+                },
+                error: function(){
+                    alert("Что то пошло не так, повторите попытку :(")
+                }
+            });
+            alert("Форма отправлена успешно!");
+            return true;
+        }
+    </script>
     <script
 		src="https://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 		crossorigin="anonymous"></script>
 	<script>
 		function SubForm2 (){
+            var name = document.forms["myForm2"]["Name"].value;
+            var phone = document.forms["myForm2"]["Phone"].value;
+            // Validate the name field
+            if (name == "") {
+                alert("Пожалуйста, введите ваше имя");
+                return false;
+            }
+            // Validate the phone field
+            var phoneRegex = /^\d{11}$/; // Regular expression to match a 10-digit phone number
+            if (!phoneRegex.test(phone)) {
+                alert("Пожалуйста, введите корректный номер телефона (11 цифр без пробелов или дефисов)");
+                return false;
+            }
+
 			$.ajax({
 				url:"https://api.apispreadsheets.com/data/eukWOMEX85DKXWP1/",
 				type:"post",
@@ -455,6 +485,8 @@
 					alert("Что то пошло не так, повторите попытку :(")
 				}
 			});
+            alert("Форма отправлена успешно!");
+            return true;
 		}
 	</script>
     <script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>

@@ -257,8 +257,8 @@
                 <img src="./img/float-maket-img1.jpg" alt="">
                 <h2>Заявканызды қалдырыныз</h2>
                 <form id="myForm" onsubmit="event.preventDefault()">
-                    <input type="text" name="Name" placeholder="Сіздің атыңыз">
-                    <input type="tel" name="Phone" placeholder="Сіздің нөмірініз">
+                    <input type="text" name="Name" placeholder="Сіздің атыңыз" autocomplete="off">
+                    <input type="tel" name="Phone" placeholder="Сіздің нөмірініз" autocomplete="off">
                     <button type="button" onclick="SubForm()">Жіберу</button>
                 </form>
             </div>
@@ -308,8 +308,8 @@
                     <h2>Маманнан толық тегін кеңес алуға заявка қалдырыңыз.</h2>
                 </div>
                 <form id="myForm2" data-aos="fade-right" data-aos-duration="1000" onsubmit="event.preventDefault()">
-                    <input type="text" name="Name" placeholder="Сіздің атыңыз">
-                    <input type="tel" name="Phone" placeholder="Сіздің нөмірініз">
+                    <input type="text" name="Name" placeholder="Сіздің атыңыз" autocomplete="off">
+                    <input type="tel" name="Phone" placeholder="Сіздің нөмірініз" autocomplete="off">
                     <button type="button" onclick="SubForm2()">Жіберу</button>
                 </form>
             </div>
@@ -422,39 +422,71 @@
 		crossorigin="anonymous">
     </script>
 	<script>
-		function SubForm (){
-			$.ajax({
-				url:"https://api.apispreadsheets.com/data/5Mycu9XW2SWKTOJI/",
-				type:"post",
-				data:$("#myForm").serializeArray(),
-				success: function(){
-					alert("Деректер сәтті жіберілді! Кері байланыс күтіңіз :)")
+        function SubForm (){
+            var name = document.forms["myForm"]["Name"].value;
+            var phone = document.forms["myForm"]["Phone"].value;
+            // Validate the name field
+            if (name == "") {
+                alert("Пожалуйста, введите ваше имя");
+                return false;
+            }
+            // Validate the phone field
+            var phoneRegex = /^\d{11}$/; // Regular expression to match a 10-digit phone number
+            if (!phoneRegex.test(phone)) {
+                alert("Пожалуйста, введите корректный номер телефона (11 цифр без пробелов или дефисов)");
+                return false;
+            }
+            // Submit the form if validation passes
+            $.ajax({
+                url:"https://api.apispreadsheets.com/data/5Mycu9XW2SWKTOJI/",
+                type:"post",
+                data:$("#myForm").serializeArray(),
+                success: function(){
+                    alert("Данные отправлены успешно! Ожидайте обратной связи :)")
                     $("#myForm").trigger('reset');
-				},
-				error: function(){
-					alert("Бірдеңе дұрыс болмады, қайталап көріңіз :(")
-				}
-			});
-		}
-	</script>
+                },
+                error: function(){
+                    alert("Что то пошло не так, повторите попытку :(")
+                }
+            });
+            alert("Форма отправлена успешно!");
+            return true;
+        }
+    </script>
     <script
 		src="https://code.jquery.com/jquery-3.4.1.js"
 		integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
 		crossorigin="anonymous"></script>
 	<script>
 		function SubForm2 (){
+            var name = document.forms["myForm2"]["Name"].value;
+            var phone = document.forms["myForm2"]["Phone"].value;
+            // Validate the name field
+            if (name == "") {
+                alert("Пожалуйста, введите ваше имя");
+                return false;
+            }
+            // Validate the phone field
+            var phoneRegex = /^\d{11}$/; // Regular expression to match a 10-digit phone number
+            if (!phoneRegex.test(phone)) {
+                alert("Пожалуйста, введите корректный номер телефона (11 цифр без пробелов или дефисов)");
+                return false;
+            }
+
 			$.ajax({
 				url:"https://api.apispreadsheets.com/data/eukWOMEX85DKXWP1/",
 				type:"post",
 				data:$("#myForm2").serializeArray(),
 				success: function(){
-					alert("Деректер сәтті жіберілді! Кері байланыс күтіңіз :)")
+					alert("Данные отправлены успешно! Ожидайте обратной связи :)")
                     $("#myForm2").trigger('reset');
 				},
 				error: function(){
-					alert("Бірдеңе дұрыс болмады, қайталап көріңіз :(")
+					alert("Что то пошло не так, повторите попытку :(")
 				}
 			});
+            alert("Форма отправлена успешно!");
+            return true;
 		}
 	</script>
 
