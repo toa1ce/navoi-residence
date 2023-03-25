@@ -25,6 +25,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin: 0;
 }
 .navbar-links li {
   display: -webkit-box;
@@ -259,6 +260,7 @@
   font-size: 18px;
   line-height: 18px;
   border: 2px solid #E6BF9B;
+  border-radius: 15px;
   background: transparent;
   color: #FFFFFF;
   padding: 18px 30px;
@@ -578,7 +580,7 @@
 }
 #form form button {
   width: 200px;
-  height: 55px;
+  height: 50px;
   border-radius: 15px;
   font-family: "Montserrat";
   font-style: normal;
@@ -658,6 +660,7 @@ footer .footer-adress p {
 footer .write-us-btn button {
   font-size: 18px;
   line-height: 18px;
+  border-radius: 15px;
   border: 2px solid #E6BF9B;
   background: transparent;
   color: #FFFFFF;
